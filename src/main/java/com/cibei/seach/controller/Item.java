@@ -5,20 +5,22 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "abc",type = "doc", shards = 1, replicas = 0)
-public class Item {
+import java.io.Serializable;
+
+@Document(indexName = "item",type = "doc", shards = 1, replicas = 0)
+public class Item  {
     //id
     @Id
     private Long id;
     private String title; //标题
-
+    @Field(type = FieldType.String)
     private String category;// 分类
-
+    @Field(type = FieldType.String)
     private String brand; // 品牌
 
     @Field(type = FieldType.Double)
     private Double price; // 价格
-
+    @Field(type = FieldType.String)
     private String images; // 图片地址
 
     public Long getId() {
@@ -76,5 +78,20 @@ public class Item {
         this.brand = brand;
         this.price = price;
         this.images = images;
+    }
+
+    public Item() {
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price=" + price +
+                ", images='" + images + '\'' +
+                '}';
     }
 }
